@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\admin\TechnologyController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,7 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
     //Route::resource('projects', ProjectController::class);
     Route::resource('projects',ProjectController::class)->parameters(['projects' => 'projects:slug']);
     Route::resource('types', TypeController::class)->parameters(['types' => 'types:slug']);
+    Route::resource('/technologies', TechnologyController::class)->parameters(['technologies' => 'technology:slug']);
     
 });
 
