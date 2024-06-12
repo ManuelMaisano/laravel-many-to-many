@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Tecnhology;
 use App\Http\Requests\StoreTecnhologyRequest;
 use App\Http\Requests\UpdateTecnhologyRequest;
+use App\Models\Technology;
 
 class TecnhologyController extends Controller
 {
@@ -22,7 +23,8 @@ class TecnhologyController extends Controller
      */
     public function create()
     {
-        //
+        $technologies = Technology::all();
+        return view('admin.project.create', compact('types', 'technologies'));
     }
 
     /**
@@ -46,7 +48,7 @@ class TecnhologyController extends Controller
      */
     public function edit(Tecnhology $tecnhology)
     {
-        //
+       
     }
 
     /**

@@ -23,8 +23,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
-      
-        return view('admin.projects.create');
+        $types = Type::all();
+        $technologies = Technology::all();
+        return view('admin.project.create', compact('types', 'technologies'));
     }
 
     /**
@@ -58,8 +59,9 @@ class ProjectController extends Controller
      */
     public function edit(Project $projects)
     {
-        return view('admin.projects.edit', compact('projects'));
-    }
+        $types = Type::all();
+        $technologies = Technology::all();
+        return view('admin.project.edit', compact('project','types', 'technologies'));
 
     /**
      * Update the specified resource in storage.
