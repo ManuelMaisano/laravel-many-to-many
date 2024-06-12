@@ -23,8 +23,8 @@ class TecnhologyController extends Controller
      */
     public function create()
     {
-        $technologies = Technology::all();
-        return view('admin.project.create', compact('types', 'technologies'));
+       
+        return view('admin.technologies.create');
     }
 
     /**
@@ -32,7 +32,13 @@ class TecnhologyController extends Controller
      */
     public function store(StoreTecnhologyRequest $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:technologies|max:255',
+        ]);
+        $form_data = $request->all();
+        $form_data['slug'] = Technology::generateSlug($form_data['name']);
+        $new_technology = Technology::create($form_data);
+        return redirect()->route('admin.technologies.show', $new_technology->slug)->with("message", "La tecnologia $new_technology->name e stata aggiunta correttamente");
     }
 
     /**
@@ -40,7 +46,7 @@ class TecnhologyController extends Controller
      */
     public function show(Tecnhology $tecnhology)
     {
-        //
+        return view('admin.technologies.show', compact('technology'));
     }
 
     /**
@@ -48,7 +54,7 @@ class TecnhologyController extends Controller
      */
     public function edit(Tecnhology $tecnhology)
     {
-       
+        return view('admin.technologies.edit', compact('technology'));
     }
 
     /**
